@@ -9,19 +9,22 @@ import React from "react"
 import P from "@/components/mdx/P"
 import H2 from "@/components/mdx/H2"
 
-const components = {
-  h1: H1,
-  h2: H2,
-  p: P,
-  HeroImage,
-}
 export default function PostPage({ source }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <div>
       <Head>
         <title>{source.frontmatter.title as string}</title>
       </Head>
-      <MDXRemote {...source} components={components} />
+      <MDXRemote
+        {...source}
+        // specifying the custom MDX components
+        components={{
+          h1: H1,
+          h2: H2,
+          p: P,
+          HeroImage,
+        }}
+      />
     </div>
   )
 }
@@ -36,12 +39,18 @@ export async function getStaticProps(
 ) {
   const { slug } = ctx.params!
 
+  // retrieve the MDX blog post file associated
+  // with the specified slug parameter
   const postFile = fs.readFileSync(`_posts\\${slug}.mdx`)
 
+  // read the MDX serialized content along with the frontmatter
+  // from the .mdx blog post file
   const mdxSource = await serialize(postFile, { parseFrontmatter: true })
   return {
     props: {
       source: mdxSource,
     },
+    // enable ISR
+    revalidate: 60,
   }
 }

@@ -2,6 +2,7 @@ import { Nunito } from "next/font/google"
 import Link from "next/link"
 
 const nunito = Nunito({ subsets: ["latin"] })
+
 export default function Header() {
   return (
     <div className={`header mb-4 ${nunito.className}`}>
