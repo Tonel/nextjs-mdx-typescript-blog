@@ -81,6 +81,22 @@
     }
   }
 
+  @media only screen and (max-width: 768px) {
+    height: 250px;
+
+    .post-card-content {
+      padding: 10px;
+
+      .post-card-title {
+        font-size: 20px;
+      }
+
+      .post-card-description {
+        font-size: 10px;
+      }
+    }
+  }
+
   &:hover {
     .post-card-content {
       color: #ff5c00 !important;

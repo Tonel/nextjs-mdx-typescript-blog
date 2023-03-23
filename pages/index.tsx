@@ -29,7 +29,7 @@ export async function getStaticProps() {
 
   // read the frontmatter for each file
   for (const postFilePath of postFilePaths) {
-    const postFile = fs.readFileSync(`_posts\\${postFilePath}`, "utf8")
+    const postFile = fs.readFileSync(`_posts/${postFilePath}`, "utf8")
 
     // serialize the MDX content to a React-compatible format
     // and parse the frontmatter
